@@ -1,0 +1,35 @@
+<h1><%= @musician.name() %></h1>
+
+<h3>Select all movies relating to this musician...but NOT Vanilla Ice.:</h3>
+
+<% if @movies.any?() %>
+  <form action="/musicians/<%= @musician.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <% @movies.each() do |movie| %>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="movie_ids[]" value="<%= movie.id() %>"><%= movie.name() %>
+        </label>
+      </div>
+    <% end %>
+
+    <button type="submit">Add movies</button>
+  </form>
+<% end %>
+
+
+<% if @musician.movies().any?() %>
+  <h3>Here are all the movies relating to this musician:</h3>
+
+  <ul>
+    <% @musician.movies().each() do |movie| %>
+      <li><%= movie.name() %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no movies yet!</p>
+<% end %>
+
+
+<a href="/">Return to Main Page</a>

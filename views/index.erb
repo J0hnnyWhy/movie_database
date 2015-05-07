@@ -3,7 +3,7 @@
 
 <p><a href="/movies">Add a new movie</a></p>
 <p><a href="/actors">Add a new actor</a></p>
-
+<p><a href="/musicians">Add a new musician</a></p>
 
 <h3>Here are all the actors in this database:</h3>
 
@@ -32,4 +32,19 @@
   </ul>
 <% else %>
   <p>There are no movies added yet!</p>
+<% end %>
+
+
+<h3>Here are all the musicians in this database:</h3>
+
+<% if @musicians.any?() %>
+  <p>Click on a musician to see information about it and mark which musicians were in it:</p>
+
+  <ul>
+    <% @musicians.each do |musician| %>
+      <li><a href="/musicians/<%= musician.id() %>"><%= musician.name() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no musicians added yet! And lets face it, there aren't that many.</p>
 <% end %>
